@@ -1,4 +1,7 @@
 class Post < ActiveRecord::Base
+	#attr_accesssible :body, :title
 	has_many :comments
-	attr_accessible :body, :title
+	belongs_to :user
+
+	default_scope order('created_at DESC')
 end
