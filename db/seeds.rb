@@ -19,7 +19,6 @@ end
       )
     u.skip_confirmation!
     u.save
-end
 
   5.times do
     topic = topics.first # getting the first topic here
@@ -29,17 +28,16 @@ end
       body: Faker::Lorem.paragraphs(2).join("\n"))
     # set the created_at to a time within the past year
     p.update_attribute(:created_at, Time.now)
-    p.update_rank
 
     topics.rotate! # add this line to move the first topic to the last, so that posts get assigned to different topics.
   end
-
+end
 
 post_count = Post.count
 User.all.each do |user|
   30.times do
     p = Post.find(2)
-    c = user.comments.create(
+    c = user.comment.create(
       body: Faker::Lorem.paragraphs(1).join("\n"),
       post: p)
     c.update_attribute(:created_at, Time.now)

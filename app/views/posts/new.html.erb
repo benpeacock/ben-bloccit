@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="span6">
-		<%= form_for @post do |f| %>
+		<%= form_for [@topic, @post] do |f| %>
 			<div class="control-group">
 				<%= f.label :title %>
 				<div class="controls">
