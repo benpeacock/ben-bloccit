@@ -33,16 +33,16 @@ end
   end
 end
 
-post_count = Post.count
-User.all.each do |user|
-  30.times do
-    p = Post.find(2)
-    c = user.comment.create(
-      body: Faker::Lorem.paragraphs(1).join("\n"),
-      post: p)
-    c.update_attribute(:created_at, Time.now)
-  end
-end
+# post_count = Post.count
+# User.all.each do |user|
+#   30.times do
+#     p = Post.find(2)
+#     c = user.comments.create(
+#       body: Faker::Lorem.paragraphs(1).join("\n"),
+#       post: p)
+#     c.update_attribute(:created_at, Time.now)
+#   end
+# end
 
 
 
