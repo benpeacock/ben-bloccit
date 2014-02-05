@@ -30,6 +30,14 @@ end
     p.update_attribute(:created_at, Time.now)
 
     topics.rotate! # add this line to move the first topic to the last, so that posts get assigned to different topics.
+  
+    2.times do
+      post = posts.first
+      c = c.comments.create(
+        post: post,
+        body: Faker::lorem.paragraphs(1)
+        )
+    end
   end
 end
 

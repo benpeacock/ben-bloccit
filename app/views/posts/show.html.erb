@@ -10,6 +10,7 @@
     <p><%= markdown @post.body %></p>
     <p><%= image_tag(@post.image_url) if @post.image? %></p>
   </div>
+    <%= content_for?(:comments) ? yield(:comments) : yield %>
   <div class="span4">
     <% if can? :edit, @post %>
       <%= link_to "Edit", edit_topic_post_path(@topic,@post), class: 'btn btn-large btn-block' %>
