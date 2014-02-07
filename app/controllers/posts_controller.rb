@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   def show
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
+    @comment = Comment.new()
   end
 
   def new
@@ -33,6 +34,7 @@ class PostsController < ApplicationController
   def update
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
+    Rails.logger.info ">>>> Post is #{@post.inspect}"
     authorize! :update, @post, message: "You need to own the post to edit it."
     if @post.update_attributes(params[:post])
       redirect_to [@topic, @post], notice: "Post was saved successfully."
