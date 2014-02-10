@@ -18,7 +18,7 @@ class TopicsController < ApplicationController
   	authorize! :update, @topic, message: "You need to be an admin to do that."
   end
 
-    def create
+  def create
     @topic = Topic.new(params[:topic])
     authorize! :create, @topic, message: "You need to be an admin to do that."
     if @topic.save
@@ -37,6 +37,19 @@ class TopicsController < ApplicationController
     else
       flash[:error] = "Error saving topic. Please try again"
       render :edit
+    end
+  end
+
+  def destroy
+    @topic = Topic.find(params[:id])
+    name = @topic.name
+    authorize! :destroy, @topic, message: "You need to own the topic to delete it."
+    if @topic.destroy
+      flash[:notice] = "\"#{name}\" was deleted successfully."
+      redirect_to topics_path
+    else
+      flash[:error] = "There was an error deleting the  topic."
+      render :show
     end
   end
 end

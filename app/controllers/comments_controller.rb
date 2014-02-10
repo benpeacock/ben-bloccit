@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
 
   def create
   	@topic = Topic.find(params[:topic_id])
-  	#@post = Post.find(params(:post_id)) #Threw error
     @post = @topic.posts.find(params[:post_id])
     @comments = @post.comments
 
