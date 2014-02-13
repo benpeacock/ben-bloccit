@@ -6,12 +6,13 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :avatar, :provider, :uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :avatar, :provider, :uid, :email_favorites
   # attr_accessible :title, :body
   has_many :posts
   has_many :comments
   before_create :set_member
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   mount_uploader :avatar, AvatarUploader
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
@@ -31,10 +32,13 @@ class User < ActiveRecord::Base
     user
   end
 
-
 ROLES = %w[member moderator admin]
   def role?(base_role)
     role.nil? ? false : ROLES.index(base_role.to_s) <= ROLES.index(role)
+  end
+
+  def favorited(post)
+    self.favorites.where(post_id: post.id).first
   end
 
   private

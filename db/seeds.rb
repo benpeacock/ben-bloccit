@@ -22,6 +22,7 @@ end
 
   5.times do
     topic = topics.first # getting the first topic here
+    
     p = u.posts.create(
       topic: topic,
       title: Faker::Lorem.words(2).join(" "),
@@ -33,10 +34,8 @@ end
     topics.rotate! # add this line to move the first topic to the last, so that posts get assigned to different topics.
   
     2.times do
-      post = posts.first
-      c = c.comments.create(
-        post: post,
-        body: Faker::lorem.paragraphs(1)
+      c = p.comments.create(
+        body: Faker::Lorem.paragraphs(1)
         )
     end
   end
