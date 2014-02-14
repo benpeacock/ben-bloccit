@@ -13,7 +13,7 @@ Bloccit::Application.routes.draw do
 	end
 
 	devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
-	resources :users, only: [:show] # create a route for users#show
+	resources :users, only: [:show, :index] # create a route for users#show and users#index
 
  	match "about" => 'welcome#about', via: :get
 
