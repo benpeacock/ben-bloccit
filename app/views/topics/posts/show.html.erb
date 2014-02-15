@@ -13,10 +13,15 @@
   <h4><%= @post.comments.count %> Comments</h4>
   <%= render partial: 'comments/comment', collection: @comments, locals: { topic: @topic, post: @post } %>
   <hr/>
-  <%# if can? :create, Comment %>
-  <h4>New Comment</h4>
-  <%= render partial: "comments/form", locals: {topic: @topic, post: @post, comment: @comment } %>
-  <%# end %>
+  <% if can? :create, Comment %>
+    <hr />
+    <a href="#" class="js-add-comment">Add Comment</a>
+    <br />
+    <div class="js-new-comment hide">
+    <h4>New Comment</h4>
+    <%= render partial: "comments/form", locals: {topic: @topic, post: @post, comment: @comment } %>
+    </div>
+  <% end %>
   <div class="span4">
     <% if can? :edit, @post %>
       <%= link_to "Edit", edit_topic_post_path(@topic,@post), class: 'btn btn-large btn-block' %>

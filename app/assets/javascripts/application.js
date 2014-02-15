@@ -15,4 +15,16 @@
 //= require bootstrap
 //= require_tree .
 
-alert('Hello World');
+$(document).ready(function() {
+  $(".js-add-comment").click(function() {
+    if ($(".js-new-comment").is(":visible")) {
+      $(".js-new-comment").slideUp();
+    }
+    else {
+      $(".js-new-comment").slideDown();
+    }
+    return false;
+  });
+});
+
+
